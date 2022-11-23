@@ -1,10 +1,17 @@
 @model IQueryable<Listing>
 
-@foreach (var p in Model ?? Enumerable.Empty<Listing>())
-{
-    <div>
-        <h3>@p.Title</h3>
-        <p>@p.StartAmount</p>
+    <div class="container-fluid">
+        <h1 class="text-center">Active Listing(s)</h1><hr>
+        <div class="row d-flex justify-content-center">
+            @foreach (var item in Model ?? Enumerable.Empty<Listing>())
+            {
+                <div class="col-6 col-md-3 m-3 card p-0 listings shadow mb-3 bg-body rounded">
+                    <img class="img-fluid card-img-top" src=@item.ImageUrl alt="Image" style="width:290px; height:160px">
+                    <div class="card-body">
+                        <h2 class="card-title mbt">@item.Title</h2>
+                        <p class="card-text mbt"><b>Starting Bid:</b> @item.StartAmount </p>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-}
-<h4>Welcome to Auction</h4>
