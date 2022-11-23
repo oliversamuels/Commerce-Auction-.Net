@@ -1,1 +1,10 @@
+@model IQueryable<Listing>
+
+@foreach (var p in Model ?? Enumerable.Empty<Listing>())
+{
+    <div>
+        <h3>@p.Title</h3>
+        <p>@p.StartAmount</p>
+    </div>
+}
 <h4>Welcome to Auction</h4>

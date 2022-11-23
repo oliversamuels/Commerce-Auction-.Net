@@ -15,6 +15,8 @@ builder.Services.AddDbContext<DataContext>(opts =>
     opts.EnableDetailedErrors();
 });
 
+builder.Services.AddScoped<IListingRepository, EFListingRepository>();
+
 
 var app = builder.Build();
 //app.MapGet("/", () => "Hello World!");
