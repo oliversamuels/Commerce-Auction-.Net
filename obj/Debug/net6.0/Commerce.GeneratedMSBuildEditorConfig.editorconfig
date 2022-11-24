@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jYXRlZ29yaWVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/categorylist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jYXRlZ29yeWxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

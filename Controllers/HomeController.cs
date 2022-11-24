@@ -38,4 +38,9 @@ public class HomeController : Controller
         var contx = repository.Listings.Select(c => c.Category).Distinct().ToList();
         return View(contx);
     }
+
+    public IActionResult CategoryList(string category)
+    {
+        return View(repository.Listings.Where(c => c.Category == category));
+    }
 }
