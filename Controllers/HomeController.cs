@@ -41,6 +41,7 @@ public class HomeController : Controller
 
     public IActionResult CategoryList(string category)
     {
+        ViewBag.category = category;
         return View(repository.Listings.Where(c => c.Category == category));
     }
 }
