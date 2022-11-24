@@ -1,0 +1,36 @@
+@model Listing
+
+<hr/>
+<h1 class="text-center">Create New Auction</h1>
+<hr/>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <form asp-action="Create" method="post">
+                <div class="form-group mb-2">
+                    <label asp-for="Title" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control" placeholder="Enter auction title">
+                </div>
+                <div class="form-group my-2">
+                    <label asp-for="Category" class="form-label">Category</label>
+                    <input asp-for="Category" class="form-control" placeholder="Enter auction category">
+               </div>
+                <div class="form-group my-2">
+                    <label asp-for="StartAmount" class="form-label">Starting Bid</label>
+                    <input asp-for="StartAmount" class="form-control" placeholder="Enter starting bid">
+                </div>
+                <div class="form-group my-2">
+                    <label asp-for="ImageUrl" class="form-label">Image Url</label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="Enter image url">
+                </div>
+                <div class="form-group my-2">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea class="form-control" asp-for="Description" rows="3" required></textarea>
+                </div>
+                <div class="form-group my-3">
+                    <input type="submit" class="btn btn-secondary" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
