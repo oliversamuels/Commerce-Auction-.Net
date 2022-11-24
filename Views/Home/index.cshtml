@@ -1,7 +1,7 @@
 @model IQueryable<Listing>
 
     <div class="container-fluid">
-        <h1 class="text-center">Active Listing(s)</h1><hr>
+        <hr/><h1 class="text-center">Active Listing(s)</h1><hr>
         <div class="row d-flex justify-content-center">
             @foreach (var item in Model ?? Enumerable.Empty<Listing>())
             {
