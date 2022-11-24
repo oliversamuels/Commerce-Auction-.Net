@@ -27,11 +27,10 @@ public class HomeController : Controller
         }
         return Redirect("/");
     }
-
-    [HttpGet("{id}")]
-    public IActionResult Listing(long id)
+    public IActionResult List(long id)
     {
-        var contx = repository.Listings.Where(d => d.ListingId.Equals(id));
+        var contx = repository.Listings.Single(d => d.ListingId == id);
+        Console.WriteLine(contx);
         return View(contx);
     }
 }

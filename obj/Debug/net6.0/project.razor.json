@@ -16308,11 +16308,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/listing.cshtml",
-      "TargetPath": "Views\\Home\\listing.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/create.cshtml",
       "TargetPath": "Views\\Home\\create.cshtml",
       "FileKind": "mvc"
@@ -16325,6 +16320,11 @@
     {
       "FilePath": "/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/index.cshtml",
       "TargetPath": "Views\\Home\\index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/list.cshtml",
+      "TargetPath": "Views\\Home\\list.cshtml",
       "FileKind": "mvc"
     }
   ],
