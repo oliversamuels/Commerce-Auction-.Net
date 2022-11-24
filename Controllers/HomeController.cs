@@ -27,10 +27,15 @@ public class HomeController : Controller
         }
         return Redirect("/");
     }
-    public IActionResult List(long id)
+    public IActionResult Listing(long id)
     {
         var contx = repository.Listings.Single(d => d.ListingId == id);
-        Console.WriteLine(contx);
+        return View(contx);
+    }
+
+    public IActionResult Categories()
+    {
+        var contx = repository.Listings.Select(c => c.Category).Distinct().ToList();
         return View(contx);
     }
 }

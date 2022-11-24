@@ -1,0 +1,21 @@
+@model List<String>
+
+<hr/>
+<h1 class="text-center">Categories</h1>
+<hr/>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <ul>
+                @foreach (var c in Model)
+                {
+                    @if (c == "")
+                    {
+                        continue;
+                    }
+                    <a asp-action="" asp-route-id="" class="clinks"><li class="fs-2">@c</li></a>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
