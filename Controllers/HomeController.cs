@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Commerce.Models;
 
 namespace Commerce.Controllers;
-
 public class HomeController : Controller
 {
     private IListingRepository repository;
@@ -15,9 +15,10 @@ public class HomeController : Controller
     }
     public IActionResult Index() => View(repository.Listings);
     
+    [Authorize]
     public IActionResult Create() => View();
 
-    [HttpPost]
+    [HttpPost][Authorize]
     public RedirectResult Create(Listing auctionlist)
     {
         if(ModelState.IsValid)

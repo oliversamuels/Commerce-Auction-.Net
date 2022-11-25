@@ -12,36 +12,41 @@
         <div class="container-fluid p-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
                 <div class="container-fluid">
-                    <a class="navbar-brand" asp-action="Index">Auction Listing</a>
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Auction Listing</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupport">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-auto">
                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" asp-action="Index">Home</a>
+                                <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item dropdown bg-transparent">
-                                <a class="nav-link" asp-action="Categories">Categories</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="Categories">Categories</a>
+                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="">Closed Listing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
+                                <a class="nav-link" asp-controller="Home" asp-action="Create">Create Auction</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Closed Listing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-action="Create">Create Auction</a>
-                            </li>
+                            }
                         </ul>
                         <ul class="navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
                             <li class="nav-item">
-                                <a class="nav-link" disabled><i class="bi bi-person"></i>&nbsp;</a>
+                                <a class="nav-link" disabled><i class="bi bi-person"></i>&nbsp;@User.Identity.Name.ToString()</a>
                             </li>
-                            <li><a class="nav-link li" href="" data-bs-toggle="tooltip" data-bs-title="<em>Logout</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-x-fill"></i></a></li>
+                            <li><a class="nav-link li" asp-controller="User" asp-action="Logout" data-bs-toggle="tooltip" data-bs-title="<em>Logout</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-x-fill"></i></a></li>
                             <li><a class="nav-link li" href="" data-bs-toggle="tooltip" data-bs-title="<em>Watchlist</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-bag-heart-fill"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></a></li>
-                            <li><a class="nav-link li" href="" data-bs-toggle="tooltip" data-bs-title="<em>Create Account</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-plus-fill"></i></a></li>
-                            <li><a class="nav-link li" href="" data-bs-toggle="tooltip" data-bs-title="<em>Login</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-check-fill"></i></a></li>
+                            }else
+                            {
+                            <li><a class="nav-link li" asp-controller="User" asp-action="Create" data-bs-toggle="tooltip" data-bs-title="<em>Create Account</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-plus-fill"></i></a></li>
+                            <li><a class="nav-link li" asp-controller="User" asp-action="Index" data-bs-toggle="tooltip" data-bs-title="<em>Login</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-check-fill"></i></a></li>
+                            }
                         </ul>
                     </div>
                 </div>
