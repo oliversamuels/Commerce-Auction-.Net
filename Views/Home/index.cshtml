@@ -5,6 +5,8 @@
         <div class="row d-flex justify-content-center">
             @foreach (var item in Model ?? Enumerable.Empty<Listing>())
             {
+                @if (item.ActiveStatus)
+                {
                 <a asp-action="Listing" asp-route-id="@item.ListingId" class="col listings clinks">
                     <div class="m-3 card p-0 listings shadow mb-3 bg-body rounded">
                         <img class="img-fluid card-img-top" src=@item.ImageUrl alt="Image" style="width:290px; height:160px">
@@ -14,6 +16,10 @@
                         </div>
                     </div>
                 </a>
+                }else
+                {
+                    <h3 class="text-center">No Active Listing</h3>
+                }
             }
         </div>
     </div>

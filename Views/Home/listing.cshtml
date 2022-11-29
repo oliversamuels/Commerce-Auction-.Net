@@ -11,8 +11,8 @@
                 <p class="card-text"><b>Starting Bid:</b> @Model.StartAmount.ToString("c")</p>
                 <p class="card-text"><b>Description:</b></p>
                 <p class="card-text">@Model.Description</p>
-                <small><p class="card-text text-mute"><b>Owner:</b> Owner </p></small>
-                <small><p class="card-text text-mute"><b>Date Added:</b> Date Created </p></small>
+                <small class="card-text text-mute"><b>Owner:</b> @Model.Author </small><br />
+                <small class="card-text text-mute"><b>Date Added:</b> @Model.CreatedAt.ToString() </small>
             </div>
         </div>
         <div class="col-sm-5 m-3 card p-0 commentsView shadow mb-3 bg-body rounded">
