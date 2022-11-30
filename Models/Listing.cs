@@ -18,5 +18,7 @@ public class Listing
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     [DefaultValue(true)]
     public bool ActiveStatus { get; set; } = true;
+    [ForeignKey("comments")]
+    public virtual ICollection<Comment>? Comments { get; set; }
 
 }

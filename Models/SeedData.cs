@@ -29,6 +29,19 @@ public static class SeedData
                 new Listing { Title = "BMW 4 Series", Author="Admin", StartAmount = 45600, Category = "Small Luxury", Description = "The 2021 BMW 4 Series is a powerful, sharp-dressed, and surprisingly efficient luxury coupe with one particularly controversial feature, its oversize grille.", ImageUrl = "https://thumbor.forbes.com/thumbor/fit-in/960x600/https://www.forbes.com/wheels/wp-content/uploads/2020/10/2021_BMW_4-series_Gallery.jpg"}
             );
 
+            context.Comments.AddRange(
+                new Comment {Name = "Admin", Review = "This is Beautiful", ListingId = 1},
+                new Comment {Name = "Oliver", Review = "This is Beautiful", ListingId = 1},
+                new Comment {Name = "Admin", Review = "This is Beautiful", ListingId = 2},
+                new Comment {Name = "Oliver", Review = "This is Beautiful", ListingId = 2},
+                new Comment {Name = "Admin", Review = "This is Beautiful", ListingId = 3},
+                new Comment {Name = "Oliver", Review = "This is Beautiful", ListingId = 3},
+                new Comment {Name = "Admin", Review = "This is Beautiful", ListingId = 4},
+                new Comment {Name = "Oliver", Review = "This is Beautiful", ListingId = 4},
+                new Comment {Name = "Admin", Review = "This is Beautiful", ListingId = 5},
+                new Comment {Name = "Oliver", Review = "This is Beautiful", ListingId = 5}
+            );
+
             context.SaveChanges();
         }
     }

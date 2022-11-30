@@ -3,6 +3,7 @@ using System;
 using Commerce.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Commerce.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221130082108_ListingCommentFK")]
+    partial class ListingCommentFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,12 +52,9 @@ namespace Commerce.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("comments")
-                        .HasColumnType("bigint");
-
                     b.HasKey("CommentId");
 
-                    b.HasIndex("comments");
+                    b.HasIndex("ListingId");
 
                     b.ToTable("Comments");
                 });
@@ -109,7 +108,9 @@ namespace Commerce.Migrations
                 {
                     b.HasOne("Commerce.Models.Listing", "Listing")
                         .WithMany("Comments")
-                        .HasForeignKey("comments");
+                        .HasForeignKey("ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Listing");
                 });

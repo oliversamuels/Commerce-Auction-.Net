@@ -30,8 +30,10 @@ public class HomeController : Controller
     }
     public IActionResult Listing(long id)
     {
-        var contx = repository.Listings.Single(d => d.ListingId == id);
-        return View(contx);
+        // var contx = repository.Listings.SingleOrDefault(d => d.ListingId == id);
+        ViewData["Listing"] = repository.Listings.SingleOrDefault(d => d.ListingId == id);
+        ViewData["Comments"] = _db.Comments.Where(c => c.ListingId == id).ToList();
+        return View();
     }
 
     public IActionResult Categories()
@@ -44,5 +46,17 @@ public class HomeController : Controller
     {
         ViewBag.category = category;
         return View(repository.Listings.Where(c => c.Category == category));
+    }
+
+    public IActionResult Comment() => View("comment");
+
+    public IActionResult SaveComment(Comment newComment, long id)
+    {
+        if (ModelState.IsValid)
+        {
+            _db.Add(newComment);
+            _db.SaveChanges();
+        }
+        return RedirectToAction("Listing", new{@id=id});
     }
 }
