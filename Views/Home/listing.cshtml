@@ -17,8 +17,8 @@
                 <p class="card-text"><b>Starting Bid:</b> @listing.StartAmount.ToString("c")</p>
                 <p class="card-text"><b>Description:</b></p>
                 <p class="card-text">@listing.Description</p>
-                <small class="card-text text-mute"><b>Owner:</b> @listing.Author </small><br />
-                <small class="card-text text-mute"><b>Date Added:</b> @listing.CreatedAt.ToString() </small>
+                <small class="card-text text-muted"><b>Owner:</b> @listing.Author </small><br />
+                <small class="card-text text-muted"><b>Date Added:</b> @listing.CreatedAt.ToString() </small>
             </div>
         </div>
         <div class="col-sm-5 m-3 card p-0 commentsView shadow mb-3 bg-body rounded">
@@ -137,7 +137,7 @@
                                                 @if (User.Identity.IsAuthenticated)
                                                 {
                                                     <label asp-for="Name" class="form-lable">Name:</label>
-                                                    <input asp-for="Name" value="@User.Identity.Name" class="form-control" readonly>
+                                                    <input asp-for="Name" value="@User.Identity.Name" class="form-control text-muted" readonly>
                                                 }else
                                                 {
                                                     <label asp-for="Name" class="form-lable">Name:</label>
@@ -166,11 +166,11 @@
                                             @foreach (Comment c in comments)
                                             {
                                                 <div class='col-11 shadow-sm mb-2 pt-3 h-auto bg-body rounded comment-card'>
-                                                    <div>
+                                                    <div class="mb-2">
                                                         <p> @c.Review</p>
                                                         <div class="d-flex justify-content-between">
-                                                            <p class="text-muted"><sub><i class="bi bi-calendar-date"></i>&nbsp; @c.DateAdded</sub></p>
-                                                            <p class="text-right"><small><i class="bi bi-person"></i>&nbsp;@c.Name</small></p>
+                                                            <small class="text-muted"><sub><i class="bi bi-calendar-date"></i>&nbsp; @c.DateAdded</sub></small>
+                                                            <small class="text-right"><sub><i class="bi bi-person"></i>&nbsp;@c.Name</sub></small>
                                                         </div>
                                                     </div>
                                                 </div>                                       
