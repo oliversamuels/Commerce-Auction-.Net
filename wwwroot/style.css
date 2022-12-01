@@ -4,6 +4,7 @@ body::-webkit-scrollbar {
   
   body {
     -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
   .mbt {
@@ -78,10 +79,11 @@ body::-webkit-scrollbar {
   .comment-cont::-webkit-scrollbar {
       display: none;
     }
-  
-  .comment-cont {
-    -ms-overflow-style: none;
-  }
+
+.comment-cont {
+    scrollbar-width: none;
+    /* -ms-overflow-style: none; */
+}
   
   .li:hover{
       transform: scale(1.08);
