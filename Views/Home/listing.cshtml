@@ -1,13 +1,13 @@
 @{
     Listing listing = ViewData["Listing"] as Listing;
-    @* Comment comment = ViewData["Comment"] as Comment; *@
     IList<Comment> comments = ViewData["Comments"] as IList<Comment>;
+    var watchlist = ViewData["Watchlist"];
 }
 
 @model Comment
     
 <div class="container-fluid">
-    <hr/><h2 class="my-2 text-center">Active Listing - @listing.Title</h2><hr/>
+    <hr/><h2 class="my-2 text-center">Active Listing - @listing?.Title</h2><hr/>
     <div class="row bbody d-flex justify-content-center">
         <div class="col-sm-5 m-3 card p-0 listingView shadow mb-3 bg-body rounded">
             <img class="img-fluid card-img-top" src="@listing.ImageUrl" alt="Image">
@@ -27,94 +27,107 @@
                     <div class="col-12 h-25 m-3">
                         <div class="row h-100 m-auto">
                                 <div class="col-6 mt-5">
-                                    @* {% if listing.owner == user and listing.active == True %} *@
-                                    @* <div class="mt-3 mx-3">
-                                        <form action="" class="form" method="POST">
-                                            <div class="form=group">
-                                                <input type="text" name="listing" value= hidden />
+                                    @if(User.Identity.IsAuthenticated && @listing.Author.ToString() == User.Identity.Name.ToString())
+                                    {
+                                        @if (@listing.ActiveStatus)
+                                        { 
+                                            <div class="mt-3 mx-3">
+                                                <form asp-action="CloseBid" asp-route-id="@listing.ListingId" class="form" method="POST">
+                                                    <div class="form=group">
+                                                        <input type="text" name="listing" value="" hidden />
+                                                    </div>
+                                                    <div class="form=group">
+                                                        <button class="btn btn-primary">Close Bid&nbsp;<i class="bi bi-x-circle"></i></button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="form=group">
-                                                <button class="btn btn-primary">Close Bid&nbsp;<i class="bi bi-x-circle"></i></button>
+                                        }else if (!@listing.ActiveStatus)
+                                        { 
+                                            <div class="mt-3 mx-3">
+                                                <form action="" class="form" method="POST">
+                                                    <div class="form=group">
+                                                        <input type="text" name="listing" value="" hidden/>
+                                                    </div>
+                                                    <div class="form=group">
+                                                        <button class="btn btn-primary" disabled>Close Bid&nbsp;<i class="bi bi-x-circle"></i></button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
-                                    </div> *@
-                                    @* {% elif listing.owner == user and listing.active == False %} *@
-                                    @* <div class="mt-3 mx-3">
-                                        <form action="" class="form" method="POST">
-                                            <div class="form=group">
-                                                <input type="text" name="listing" value="" hidden />
-                                            </div>
-                                            <div class="form=group">
-                                                <button class="btn btn-primary" disabled>Close Bid&nbsp;<i class="bi bi-x-circle"></i></button>
-                                            </div>
-                                        </form>
-                                    </div> *@
-                                    @* {% else %} *@
-                                    @* {% if listing.active == True %}
-                                        {% if listing.id in watchlist %}
-                                        <form action="{% url 'remove-watchlist' %}" class="form" method="POST">
-                                            {% csrf_token %}
-                                            <div class="form=group">
-                                                <input type="text" name="listing" value={{ listing.id }} hidden>
-                                            </div>
-                                            <div class="form=group">
-                                                <button class="btn btn-primary">Remove from Watchlist&nbsp;<i class="bi bi-x-lg"></i></i></button>
-                                            </div>
-                                        </form>
-                                        {% else %} *@
-                                        <form action="" class="form" method="POST">
-                                            <div class="form=group">
-                                                <input type="text" name="listing" value="" hidden />
-                                            </div>
-                                            <div class="form=group">
-                                                <button class="btn btn-primary">Add to Watchlist&nbsp;<i class="bi bi-heart-fill"></i></button>
-                                            </div>
-                                        </form>
-                                        @* {% endif %} *@
-                                    @* {% else %}
-                                        {% if listing.id in watchlist %}
-                                        <form action="{% url 'remove-watchlist' %}" class="form" method="POST">
-                                            {% csrf_token %}
-                                            <div class="form=group">
-                                                <input type="text" name="listing" value={{ listing.id }} hidden>
-                                            </div>
-                                            <div class="form=group">
-                                                <button class="btn btn-primary">Remove from Watchlist&nbsp;<i class="bi bi-x-lg" disabled></i></i></button>
-                                            </div>
-                                        </form>
-                                        {% else %}
-                                        <form action="{% url 'add-watchlist' %}" class="form" method="POST">
-                                            {% csrf_token %}
-                                            <div class="form=group">
-                                                <input type="text" name="listing" value={{ listing.id }} hidden>
-                                            </div>
-                                            <div class="form=group">
-                                                <button class="btn btn-primary">Add to Watchlist&nbsp;<i class="bi bi-heart-fill" disabled></i></button>
-                                            </div>
-                                        </form>
-                                        {% endif %}
-                                    {% endif %} *@
+                                        }
+                                    }else if (User.Identity.IsAuthenticated)
+                                    {
+                                        @if (@listing.ActiveStatus && @ViewBag.watchlist)
+                                        {
+                                                <form asp-action="RemoveItem" class="form" method="POST">
+                                                    <div class="form=group">
+                                                        <input type="text" name="id" value="@listing.ListingId" hidden />
+                                                    </div>
+                                                    <div class="form=group">
+                                                        <button class="btn btn-primary">Remove from Watchlist&nbsp;<i class="bi bi-x-lg"></i></button>
+                                                    </div>
+                                                </form>
+                                        } else if (@listing.ActiveStatus && !@ViewBag.watchlist)
+                                        {
+                                                <form asp-action="AddWatchItem" class="form" method="POST">
+                                                    <div class="form=group">
+                                                        <input type="text" name="id" value="@listing.ListingId" hidden />
+                                                    </div>
+                                                    <div class="form=group">
+                                                        <button class="btn btn-primary">Add to Watchlist&nbsp;<i class="bi bi-heart-fill"></i></button>
+                                                    </div>
+                                                </form>
+                                        }
+                                    } else if (!User.Identity.IsAuthenticated)
+                                    {
+                                            <form action="" class="form" method="POST" disabled>
+                                                <div class="form=group">
+                                                    <input type="text" name="listing" value="" hidden>
+                                                </div>
+                                                <div class="form=group">
+                                                    <button class="btn btn-primary" disabled>Add to Watchlist&nbsp;<i class="bi bi-heart-fill"></i></button >
+                                                </div>
+                                            </form>
+                                    }
                                 </div>
                                 <div class="col-6 d-flex mt-2">
                                     <div>
-                                        @* {% if messages %}
-                                            {% for message in messages %}
-                                                <div class="alert alert-info" role="alert">{{ message }}</div>
-                                            {% endfor %}
-                                        {% endif %}
-                                        {% if listing.active == True %} *@
-                                        <form action="" class="form" method="POST">
+                                    @if (@listing.ActiveStatus == true)
+                                    {
+                                        @if (@ViewBag.msg != "")
+                                        {
+                                            <div class="alert alert-info py-2" role="alert">@ViewBag.msg.ToString()</div>
+                                        }
+                                        <form asp-action="Bid" class="form" method="POST">
                                             <div class="form=group">
-                                                <input type="text" name="listing" value="" hidden />
+                                                <input type="text" name="id" value="@listing.ListingId" hidden />
                                             </div>
                                             <div class="input-group form-group my-3">
                                                 <span class="input-group-text" id="basic-addon1">$</span>
                                                 <input type="number" name="amount" class="form-control" placeholder="Bid" aria-describedby="basic-addon1" required>
                                             </div>
-                                            <div class="form-group my-3">
+                                            <div class="form-group my-2">
                                                 <button type="submit" class="btn btn-secondary">Place Bid</button>
                                             </div>
                                         </form>
+                                    } else if (@listing.ActiveStatus == false)
+                                    {
+                                        <form asp-action="Bid" class="form" method="POST">
+                                            <div class="form=group">
+                                                <input type="text" name="id" value="@listing.ListingId" hidden />
+                                            </div>
+                                            <div class="input-group form-group my-3">
+                                                <span class="input-group-text" id="basic-addon1">$</span>
+                                                <input type="number" name="amount" class="form-control" placeholder="Bid" aria-describedby="basic-addon1" required disabled>
+                                            </div>
+                                            <div class="form-group my-2">
+                                                <button type="submit" class="btn btn-secondary" disabled>Place Bid</button>
+                                            </div>
+                                        </form>
+
+                                        <div class="alert alert-info mt-2 py-2" role="alert">
+                                            <p><small>Bidding is closed for this item.</small></p>
+                                        </div>
+                                    }
                                         @* {% elif winner %}
                                             <div class="alert alert-success mt-4" role="alert"><p><small>Congratulations {{winner|title}}! You won the bid.</small></p></div>
                                         {% else %}
@@ -125,13 +138,12 @@
                             @* {% endif %} *@
                         </div>
                     </div>
-                    <div class="col-12 h-75">
+                    <div class="col-12 h-75 mt-3">
                         <div class="row h-100">
                            <div class="row h-100">
                                 <div class="col-6 h-100 p-3">
                                     <h3 class="mx-3">Comment Form</h3>
                                     <div class="container">
-                                    @* {% if listing.active == True %} *@
                                         <form asp-action="SaveComment" asp-route-id="@listing.ListingId" method="post">
                                             <div class="form-group my-3">
                                                 @if (User.Identity.IsAuthenticated)

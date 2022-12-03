@@ -20,5 +20,7 @@ public class Listing
     public bool ActiveStatus { get; set; } = true;
     [ForeignKey("comments")]
     public virtual ICollection<Comment>? Comments { get; set; }
+    [ForeignKey("bids")]
+    public virtual Bid? Bids { get; set; }
 
 }

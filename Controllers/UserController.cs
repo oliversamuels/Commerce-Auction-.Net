@@ -40,7 +40,7 @@ public class UserController : Controller
     {
         if (ModelState.IsValid)
         {
-            IdentityUser user = new IdentityUser { UserName = newUser.UserName, Email = newUser.Email };
+            IdentityUser user = new IdentityUser { UserName = newUser.UserName, Email = newUser.Email};
 
             IdentityResult result = await UserManager.CreateAsync(user, newUser.Password);
 

@@ -9,4 +9,5 @@ public class DataContext : DbContext
     public DbSet<Listing> Listings => Set<Listing>();
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<Bid> Bids => Set<Bid>();
+    public DbSet<WatchList> WatchLists => Set<WatchList>();
 }

@@ -2,6 +2,7 @@ namespace Commerce.Models;
 
 public class ViewModel
 {
-    public IEnumerable<Listing>? Listings {get; set;}
-    public IEnumerable<Comment>? Comments {get; set;}
+    public Listing? Listing {get; set;}
+    public Comment? Comment {get; set;}
+    public Bid? Bid {get; set;}
 }

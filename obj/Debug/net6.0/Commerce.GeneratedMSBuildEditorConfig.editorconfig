@@ -15,12 +15,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /home/oliversamuels/Dev/ASPDOTNET/Commerce
 build_property._RazorSourceGeneratorDebug = 
 
+[/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/bids.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9iaWRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/categories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jYXRlZ29yaWVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/categorylist.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jYXRlZ29yeWxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/closedlistings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9jbG9zZWRsaXN0aW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/create.cshtml]

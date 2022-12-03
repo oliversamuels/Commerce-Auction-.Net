@@ -28,11 +28,14 @@ public class HomeController : Controller
         }
         return Redirect("/");
     }
-    public IActionResult Listing(long id)
+    public IActionResult Listing(long id, string message = "")
     {
-        // var contx = repository.Listings.SingleOrDefault(d => d.ListingId == id);
+        var userName = User?.Identity?.Name;
         ViewData["Listing"] = repository.Listings.SingleOrDefault(d => d.ListingId == id);
         ViewData["Comments"] = _db.Comments.Where(c => c.ListingId == id).ToList();
+        var contx = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId).ToArray();
+        ViewBag.watchList = contx.Contains(id);
+        ViewBag.msg = message;
         return View();
     }
 
@@ -48,6 +51,11 @@ public class HomeController : Controller
         return View(repository.Listings.Where(c => c.Category == category));
     }
 
+    public IActionResult ClosedListings()
+    {
+        return View(repository.Listings.Where(c => c.ActiveStatus == false));
+    }
+
     public IActionResult Comment() => View("comment");
 
     public IActionResult SaveComment(Comment newComment, long id)
@@ -59,4 +67,99 @@ public class HomeController : Controller
         }
         return RedirectToAction("Listing", new{@id=id});
     }
+
+    public IActionResult Bids() => View();
+
+    [HttpPost]
+    public IActionResult Bid(long id, decimal amount)
+    {
+        var userName = User?.Identity?.Name;
+        var message = "";
+        var item = _db.Bids.SingleOrDefault(d => d.ListingId == id);
+        var listing = repository.Listings.SingleOrDefault(d => d.ListingId == id);
+        Bid newBid = new Bid{
+            Amount = amount, UserName = userName, ListingId = id
+        };
+
+        if (item != null)
+        {
+            if (item.Amount < amount)
+            {
+                _db.Bids.Remove(item);
+                _db.Bids.Add(newBid);
+                _db.SaveChanges();
+                message = "Bid Accepted!";
+            }
+            else
+            {
+                message = "Bid Not Accepted!";
+            }
+
+        } else 
+        {
+            Console.WriteLine(listing?.StartAmount);
+            if (listing?.StartAmount < amount)
+            {
+                _db.Bids.Add(newBid);
+                _db.SaveChanges();
+                message = "Bid Accepted!";
+            }
+            else
+            {
+                message = "Bid Not Accepted!";
+            }
+        }
+
+        Console.WriteLine("UserId: "+ userName);
+        Console.WriteLine("ListingID: "+ id);
+        Console.WriteLine("Amount: "+ amount);
+
+        return RedirectToAction("Listing", new{@id=id, @message=message});
+    }
+
+    public IActionResult CloseBid(long id)
+    {
+        var item = _db.Listings.FirstOrDefault(d => d.ListingId == id);
+        if (item != null)
+        {
+            item.ActiveStatus = false;
+            _db.SaveChanges();
+        }
+
+        return RedirectToAction("Listing", new{@id=id});
+    }
+
+    public IActionResult AddWatchItem(WatchList newWatchlist, long id)
+    {
+        var userName = User?.Identity?.Name;
+        if (userName != null)
+        {
+            WatchList watchList = new WatchList {Username = userName, ListingId = id};
+            _db.WatchLists.Add(watchList);
+            _db.SaveChanges();
+        }
+        return RedirectToAction("Listing", new{@id=id});
+    }
+
+    public IActionResult RemoveItem(long id)
+    {
+        var userName = User?.Identity?.Name;
+        var item = _db.WatchLists.Where(s => s.Username == userName).SingleOrDefault(n => n.ListingId == id);
+        if (item != null)
+        {
+            _db.WatchLists.Remove(item);
+            _db.SaveChanges();
+        }
+
+        return RedirectToAction("Listing", new{@id=id});
+    }
+
+    // public IActionResult WatchLists()
+    // {
+    //     var userName = User?.Identity?.Name;
+    //     var contx = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId).ToArray();
+    //     var lists
+
+    //     return View(repository.Listings.Where(c => c.Category == category));
+    // }
 }
