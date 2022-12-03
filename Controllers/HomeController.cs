@@ -34,7 +34,9 @@ public class HomeController : Controller
         ViewData["Listing"] = repository.Listings.SingleOrDefault(d => d.ListingId == id);
         ViewData["Comments"] = _db.Comments.Where(c => c.ListingId == id).ToList();
         var contx = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId).ToArray();
+        var cont = _db.Bids.SingleOrDefault(i => i.ListingId == id);
         ViewBag.watchList = contx.Contains(id);
+        ViewBag.winner = cont?.UserName;
         ViewBag.msg = message;
         return View();
     }
