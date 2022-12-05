@@ -156,12 +156,11 @@ public class HomeController : Controller
         return RedirectToAction("Listing", new{@id=id});
     }
 
-    // public IActionResult WatchLists()
-    // {
-    //     var userName = User?.Identity?.Name;
-    //     var contx = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId).ToArray();
-    //     var lists
-
-    //     return View(repository.Listings.Where(c => c.Category == category));
-    // }
+    public IActionResult WatchLists()
+    {
+        var userName = User?.Identity?.Name;
+        ViewBag.watchlist = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId).ToArray();
+        ViewData["Listing"] = repository.Listings;
+        return View();
+    }
 }

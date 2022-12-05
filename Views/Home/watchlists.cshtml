@@ -1,0 +1,27 @@
+@{
+    IQueryable<Listing> listing = ViewData["Listing"] as IQueryable<Listing>;
+}
+
+    <div class="container-fluid">
+        <hr/><h1 class="text-center">Watchlist</h1><hr>
+        <div class="row d-flex justify-content-center">
+            @foreach (var item in @listing ?? Enumerable.Empty<Listing>())
+            {
+                @foreach (var id in @ViewBag.watchlist)
+                {
+                    @if (@item.ActiveStatus && @item.ListingId == id)
+                    {
+                    <a asp-action="Listing" asp-route-id="@item.ListingId" class="col listings clinks">
+                        <div class="m-3 card p-0 listings shadow mb-3 bg-body rounded">
+                            <img class="img-fluid card-img-top" src=@item.ImageUrl alt="Image" style="width:290px; height:160px">
+                            <div class="card-body">
+                                <h2 class="card-title mbt">@item.Title</h2>
+                                <p class="card-text mbt"><b>Starting Bid:</b> @item.StartAmount.ToString("c") </p>
+                            </div>
+                        </div>
+                    </a>
+                    }
+                }
+            }
+        </div>
+    </div>

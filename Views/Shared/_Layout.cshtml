@@ -41,7 +41,7 @@
                                 <a class="nav-link" disabled><i class="bi bi-person"></i>&nbsp;@User.Identity.Name.ToString()</a>
                             </li>
                             <li><a class="nav-link li" asp-controller="User" asp-action="Logout" data-bs-toggle="tooltip" data-bs-title="<em>Logout</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-x-fill"></i></a></li>
-                            <li><a class="nav-link li" href="" data-bs-toggle="tooltip" data-bs-title="<em>Watchlist</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-bag-heart-fill"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></a></li>
+                            <li><a class="nav-link li" asp-controller="Home" asp-action="WatchLists" data-bs-toggle="tooltip" data-bs-title="<em>Watchlist</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-bag-heart-fill"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></a></li>
                             }else
                             {
                             <li><a class="nav-link li" asp-controller="User" asp-action="Create" data-bs-toggle="tooltip" data-bs-title="<em>Create Account</em>" data-bs-placement="bottom" data-bs-html="true"><i class="bi bi-person-plus-fill"></i></a></li>

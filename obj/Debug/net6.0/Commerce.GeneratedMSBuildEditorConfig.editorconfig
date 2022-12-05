@@ -43,8 +43,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9saXN0aW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/watchlist.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS93YXRjaGxpc3QuY3NodG1s
+[/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Home/watchlists.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS93YXRjaGxpc3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/oliversamuels/Dev/ASPDOTNET/Commerce/Views/Shared/_Layout.cshtml]

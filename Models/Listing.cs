@@ -22,5 +22,7 @@ public class Listing
     public virtual ICollection<Comment>? Comments { get; set; }
     [ForeignKey("bids")]
     public virtual Bid? Bids { get; set; }
+    [ForeignKey("watchlist")]
+    public virtual ICollection<WatchList>? WatchLists { get; set; }
 
 }
