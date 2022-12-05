@@ -9,10 +9,6 @@
             <ul>
                 @foreach (var c in Model)
                 {
-                    @if (c == "")
-                    {
-                        continue;
-                    }
                     <a asp-action="CategoryList" asp-route-category="@c" class="clinks"><li class="fs-2">@c</li></a>
                 }
             </ul>

@@ -13,7 +13,7 @@ public class HomeController : Controller
         repository = repo;
         _db = db;
     }
-    public IActionResult Index() => View(repository.Listings);
+    public IActionResult Index() => View(repository.Listings.AsEnumerable());
     
     [Authorize]
     public IActionResult Create() => View();
