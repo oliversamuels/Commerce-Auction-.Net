@@ -159,8 +159,21 @@ public class HomeController : Controller
     public IActionResult WatchLists()
     {
         var userName = User?.Identity?.Name;
-        ViewBag.watchlist = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId).ToArray();
-        ViewData["Listing"] = repository.Listings;
+        // ViewBag.watchlist = _db.WatchLists.Where(s => s.Username == userName).Select(n => n.ListingId);
+        // ViewData["Listing"] = repository.Listings.Join(_db.WatchLists, d => d.ListingId, i => i.ListingId, (d,i) => new {
+            
+        // });
+
+        ViewData["watchList"] = from l in repository.Listings
+                    from w in _db.WatchLists
+                    where l.ListingId == w.ListingId && w.Username == userName
+                    select new {
+                        l.ListingId,
+                        l.ActiveStatus,
+                        l.ImageUrl,
+                        l.StartAmount,
+                        l.Title
+                    };
         return View();
     }
 }
